@@ -13,8 +13,8 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/yvasiyarov/swagger/markup"
-	"github.com/yvasiyarov/swagger/parser"
+	"github.com/umarniz/swagger/markup"
+	"github.com/umarniz/swagger/parser"
 )
 
 const (

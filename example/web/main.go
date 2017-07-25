@@ -3,14 +3,15 @@
 // @APIDescription Swagger Example API
 // @BasePath http://127.0.0.1:3000/
 // @Contact varyous@gmail.com
-// @TermsOfServiceUrl http://yvasiyarov.com/
+// @TermsOfServiceUrl http://umarniz.com/
 // @License BSD
-// @LicenseUrl http://yvasiyarov.com/
+// @LicenseUrl http://umarniz.com/
 package main
 
 import (
-	"github.com/yvasiyarov/swagger/example"
 	"net/http"
+
+	"github.com/umarniz/swagger/example"
 )
 
 func main() {

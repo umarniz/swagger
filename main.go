@@ -4,7 +4,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/yvasiyarov/swagger/generator"
+	"github.com/umarniz/swagger/generator"
 )
 
 var apiPackage = flag.String("apiPackage", "", "The package that implements the API controllers, relative to $GOPATH/src")
@@ -19,6 +19,7 @@ var vendoringPath = flag.String("vendoringPath", "", "Directory of vendoring if 
 
 func main() {
 	flag.Parse()
+	log.Print("Umar Edition")
 	if *mainApiFile == "" {
 		*mainApiFile = *apiPackage + "/main.go"
 	}
