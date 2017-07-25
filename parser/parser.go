@@ -2,6 +2,7 @@ package parser
 
 import (
 	"encoding/json"
+	"fmt"
 	"go/ast"
 	goparser "go/parser"
 	"go/token"
@@ -11,7 +12,6 @@ import (
 	"regexp"
 	"runtime"
 	"strings"
-	"fmt"
 )
 
 var vendoringPath string
@@ -125,7 +125,6 @@ func (parser *Parser) CheckRealPackagePath(packagePath string) string {
 		}
 	}
 
-
 	// first check vendor folder, vendoring in GO 1.7 and greater is officially supported
 	// evaluate if the user specified a different vendor directory rather
 	// than using current working directory to find vendor
@@ -198,7 +197,7 @@ func (parser *Parser) GetRealPackagePath(packagePath string) string {
 }
 
 func (parser *Parser) GetPackageAst(packagePath string) map[string]*ast.Package {
-	//log.Printf("Parse %s package\n", packagePath)
+	log.Printf("Parse %s package\n", packagePath)
 	if cache, ok := parser.PackagesCache[packagePath]; ok {
 		return cache
 	} else {
@@ -206,7 +205,11 @@ func (parser *Parser) GetPackageAst(packagePath string) map[string]*ast.Package 
 
 		astPackages, err := goparser.ParseDir(fileSet, packagePath, ParserFileFilter, goparser.ParseComments)
 		if err != nil {
-			log.Fatalf("Parse of %s pkg cause error: %s\n", packagePath, err)
+			if strings.Contains(err.Error(), "19.go") {
+				log.Printf("Go 19 parsing error, ignoring. Parse of %s pkg cause error: %s\n", packagePath, err)
+			} else {
+				log.Fatalf("Parse of %s pkg cause error: %s\n", packagePath, err)
+			}
 		}
 		parser.PackagesCache[packagePath] = astPackages
 		return astPackages

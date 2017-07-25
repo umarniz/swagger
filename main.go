@@ -19,7 +19,6 @@ var vendoringPath = flag.String("vendoringPath", "", "Directory of vendoring if 
 
 func main() {
 	flag.Parse()
-
 	if *mainApiFile == "" {
 		*mainApiFile = *apiPackage + "/main.go"
 	}
@@ -38,7 +37,7 @@ func main() {
 		Ignore:          *ignore,
 		ContentsTable:   *contentsTable,
 		Models:          *models,
-		VendoringPath:	 *vendoringPath,
+		VendoringPath:   *vendoringPath,
 	}
 
 	err := generator.Run(params)
